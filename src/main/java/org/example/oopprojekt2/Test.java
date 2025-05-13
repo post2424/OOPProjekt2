@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Test {
     public static void kirjutaTsekki(String failinimi, Ost ost) throws IOException {
@@ -47,18 +48,13 @@ public class Test {
         kirjutaTsekki(nimi2+"-"+LocalDate.now()+".txt", ost2);
     }
     public static void main(String[] args) throws IOException {
-        Toode toode = new Toode("banaan", 1.02, 1.89, "Jüri");
-        Toode toode2 = new Toode("vorst", 2.09, "Mati");
-        Toode toode3 = new Toode("jogurt", 1.59, "Mati");
-        Toode toode4 = new Toode("muna", 1.79, "Jüri");
-        Toode toode5 = new Toode("kartul", 2.71, 0.89, "Jüri");
-        ArrayList<Toode> tooted = new ArrayList<>();
-        tooted.add(toode);
-        tooted.add(toode2);
-        tooted.add(toode3);
-        tooted.add(toode4);
-        tooted.add(toode5);
-        Ost ost = new Ost(tooted);
+        Ost ost = new Ost(Arrays.asList(
+                new Toode("banaan", 1.02, 1.89, "Jüri"),
+                new Toode("vorst", 2.09, "Mati"),
+                new Toode("jogurt", 1.59, "Mati"),
+                new Toode("muna", 1.79, "Jüri"),
+                new Toode("kartul", 2.71, 0.89, "Jüri")
+        ));
         valjastaKaksTsekki(ost, "Jüri", "Mati");
     }
 }

@@ -35,4 +35,8 @@ public class Toode {
     public String getKelleMaksta() {
         return kelleMaksta;
     }
+
+    public void setKelleMaksta(String kelleMaksta) {
+        this.kelleMaksta = kelleMaksta;
+    }
 }
