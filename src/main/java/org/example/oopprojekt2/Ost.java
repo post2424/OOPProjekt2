@@ -11,6 +11,11 @@ public class Ost {
         this.tooted = tooted;
         this.onTagasiMakstud = false; /*ostu tegemisel eeldab, et selle eest ei ole veel tagasi makstud*/
     }
+
+    public List<Toode> getTooted() {
+        return tooted;
+    }
+
     public void maksaTagasi() {
         onTagasiMakstud = true;
     }
