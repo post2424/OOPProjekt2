@@ -39,4 +39,14 @@ public class Toode {
     public void setKelleMaksta(String kelleMaksta) {
         this.kelleMaksta = kelleMaksta;
     }
+
+    @Override
+    public String toString() { //testimiseks
+        return "Toode{" +
+                "kirjeldus='" + kirjeldus + '\'' +
+                ", kogus=" + kogus +
+                ", hind=" + hind +
+                ", kelleMaksta='" + kelleMaksta + '\'' +
+                '}';
+    }
 }

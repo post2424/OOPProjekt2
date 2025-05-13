@@ -1,6 +1,7 @@
 package org.example.oopprojekt2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Ost {
@@ -18,5 +19,10 @@ public class Ost {
 
     public void maksaTagasi() {
         onTagasiMakstud = true;
+    }
+
+    @Override
+    public String toString() { //testimiseks
+        return tooted.toString();
     }
 }

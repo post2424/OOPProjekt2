@@ -1,12 +1,14 @@
 package org.example.oopprojekt2;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -33,12 +35,19 @@ public class HelloApplication extends Application {
             vbox.getChildren().add(cb);
         }
         Button nupp = new Button("Kinnita");
+        vbox.getChildren().add(nupp);
         juur.getChildren().add(vbox);
-        for (int i = 0; i < vbox.getChildren().size(); i++) {
-            if (((CheckBox) vbox.getChildren().get(i)).isSelected()) {
-                ost.getTooted().get(i).setKelleMaksta("Jüri");
+        nupp.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                for (int i = 0; i < vbox.getChildren().size(); i++) {
+                    if (((CheckBox) vbox.getChildren().get(i)).isSelected()) {
+                        ost.getTooted().get(i).setKelleMaksta("Mati");
+                    }
+                }
             }
-        }
+        });
+        System.out.println(ost);
         stage.setTitle("Ostukorvi planeerija");
         stage.setScene(stseen);
         stage.show();
