@@ -8,14 +8,26 @@ import java.util.ArrayList;
 public class Test {
     public static void kirjutaTsekki(String failinimi, Ost ost) throws IOException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(failinimi))) {
+            double kogusumma = 0;
+            bw.write("Toode:");
+            bw.write("\t");
+            bw.write("Kogus:");
+            bw.write("\t");
+            bw.write("Kokku:");
+            bw.newLine();
             for (Toode toode : ost.getTooted()) {
                 bw.write(toode.getKirjeldus());
-                bw.write(';');
+                bw.write("\t");
                 bw.write(String.valueOf(toode.getKogus()));
-                bw.write(';');
-                bw.write(String.valueOf(Math.round(toode.getKogus()*toode.getHind()*100.0)/100.0));
+                bw.write("\t");
+                double summa = Math.round(toode.getKogus()*toode.getHind()*100.0)/100.0;
+                kogusumma += summa;
+                bw.write(String.valueOf(summa));
                 bw.newLine();
             }
+            bw.write("Kogusumma: ");
+            bw.write("\t");
+            bw.write(String.valueOf(Math.round(kogusumma*100.0)/100.0));
         }
     }
 
