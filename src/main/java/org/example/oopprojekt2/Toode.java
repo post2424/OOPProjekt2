@@ -4,17 +4,20 @@ public class Toode {
     private String kirjeldus;
     private double kogus;
     private double hind;
+    private String kelleMaksta;
 
-    public Toode(String kirjeldus, double kogus, double hind) {
+    public Toode(String kirjeldus, double kogus, double hind, String kelleMaksta) {
         this.kirjeldus = kirjeldus;
         this.kogus = kogus;
         this.hind = hind;
+        this.kelleMaksta = kelleMaksta;
     }
 
-    public Toode(String kirjeldus, double hind) { /*saab luua ka kogust määramata, siis loetakse koguseks vaikimisi 1*/
+    public Toode(String kirjeldus, double hind, String kelleMaksta) { /*saab luua ka kogust määramata, siis loetakse koguseks vaikimisi 1*/
         this.kirjeldus = kirjeldus;
         this.kogus = 1;
         this.hind = hind;
+        this.kelleMaksta = kelleMaksta;
     }
 
     public String getKirjeldus() {
@@ -27,5 +30,9 @@ public class Toode {
 
     public double getHind() {
         return hind;
+    }
+
+    public String getKelleMaksta() {
+        return kelleMaksta;
     }
 }
