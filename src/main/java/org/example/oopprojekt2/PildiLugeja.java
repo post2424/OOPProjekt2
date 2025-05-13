@@ -35,11 +35,14 @@ public class PildiLugeja {
                 if (tükeldatudTekst.get(i).contains("Toode|Kogus"))nimekirjaAlgus = i+1;
             }else if (tükeldatudTekst.get(i).contains("Kokku")) {nimekirjaLõpp = i-1;break;}
         }
+        /*
         Ost ost = new Ost();
         for (int i = nimekirjaAlgus; i <= nimekirjaLõpp; i++) {
             String
             ost.lisaToode(new Toode())
         }
+
+         */
 
     }
 
