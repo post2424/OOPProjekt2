@@ -40,8 +40,10 @@ public class HelloApplication extends Application {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 for (int i = 0; i < vbox.getChildren().size(); i++) {
-                    if (((CheckBox) vbox.getChildren().get(i)).isSelected()) {
-                        ost.getTooted().get(i).setKelleMaksta("Mati");
+                    if (vbox.getChildren().get(i) instanceof CheckBox) {
+                        if (((CheckBox) vbox.getChildren().get(i)).isSelected()) {
+                            ost.getTooted().get(i).setKelleMaksta("Mati");
+                        }
                     }
                 }
             }
