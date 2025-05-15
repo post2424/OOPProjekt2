@@ -46,9 +46,9 @@ public class HelloApplication extends Application {
                         }
                     }
                 }
+                System.out.println(ost);
             }
         });
-        System.out.println(ost);
         stage.setTitle("Ostukorvi planeerija");
         stage.setScene(stseen);
         stage.show();
