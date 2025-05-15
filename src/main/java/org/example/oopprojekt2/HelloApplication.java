@@ -11,7 +11,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
