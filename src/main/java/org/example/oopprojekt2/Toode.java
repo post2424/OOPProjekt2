@@ -39,6 +39,9 @@ public class Toode {
     public void setKelleMaksta(String kelleMaksta) {
         this.kelleMaksta = kelleMaksta;
     }
+    public double koguhind() {
+        return Math.round(kogus*hind*100.0)/100.0;
+    }
 
     @Override
     public String toString() { //testimiseks
