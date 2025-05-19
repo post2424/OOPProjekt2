@@ -12,13 +12,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class HelloApplication extends Application {
     public double arvutaKogusumma(String nimi, Ost ost) { //leiab ühe inimese poolt tasutava summa nime järgi
@@ -69,7 +69,7 @@ public class HelloApplication extends Application {
         kirjutaTsekki(nimi2+"-"+LocalDateTime.now().format(formaat)+".txt", new Ost(tooted2));
     }
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage lava) throws IOException {
         //stseeni loomine
         VBox vbox = new VBox();
         vbox.setSpacing(5);
@@ -148,15 +148,28 @@ public class HelloApplication extends Application {
                     vbox.getChildren().add(kinnitus);
                     kinnitus.wrappingWidthProperty().bind(vbox.widthProperty());
                     kinnitus.setFont(new Font(14));
+                    List<Ost> ostud;
+                    //ostu salvestamine. mdea kas see on kõige parem viis teha seda lmao
+                    try {
+                        ObjectInputStream in = new ObjectInputStream(new FileInputStream("ostud.ser"));
+                        ostud = (List<Ost>) in.readObject();
+                        in.close();
+                    } catch (Exception e) {
+                        ostud = new ArrayList<>(); // kui faili pole olemas
+                    }
+                    ostud.add(ost);
+                    ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("ostud.ser"));
+                    out.writeObject(ostud);
+                    out.close();
                 } catch (IOException e) { // ta ei lase mul throws exception päisesse panna, idk mis teha sellega lmao
                     throw new RuntimeException(e);
                 }
             }
         });
         //lõpp
-        stage.setTitle("Ostukorvi planeerija");
-        stage.setScene(stseen);
-        stage.show();
+        lava.setTitle("Ostukorvi planeerija");
+        lava.setScene(stseen);
+        lava.show();
     }
 
     public static void main(String[] args) {

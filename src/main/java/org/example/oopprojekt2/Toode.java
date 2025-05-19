@@ -1,6 +1,8 @@
 package org.example.oopprojekt2;
 
-public class Toode {
+import java.io.Serializable;
+
+public class Toode implements Serializable {
     private String kirjeldus;
     private double kogus;
     private double hind;
@@ -44,12 +46,7 @@ public class Toode {
     }
 
     @Override
-    public String toString() { //testimiseks
-        return "Toode{" +
-                "kirjeldus='" + kirjeldus + '\'' +
-                ", kogus=" + kogus +
-                ", hind=" + hind +
-                ", kelleMaksta='" + kelleMaksta + '\'' +
-                '}';
+    public String toString() {
+        return kirjeldus+"; kogus: "+kogus+"; koguhind: "+koguhind()+"; maksab: "+kelleMaksta;
     }
 }
