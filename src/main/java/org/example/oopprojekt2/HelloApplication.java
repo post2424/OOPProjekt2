@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -74,7 +75,10 @@ public class HelloApplication extends Application {
         VBox vbox = new VBox();
         vbox.setSpacing(5);
         vbox.setPadding(new Insets(5,5,5,5));
-        Scene stseen = new Scene(vbox, 510, 400);
+        ScrollPane scrollpane = new ScrollPane(vbox);
+        scrollpane.setFitToWidth(true);
+        scrollpane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); //näitab ainult vertikaalset kerimisriba ja ainult siis, kui sisu ära ei mahu
+        Scene stseen = new Scene(scrollpane, 510, 400);
         //näiteost testimiseks, hiljem loeb pildi pealt
         String kasutaja1 = "Jüri"; //need kasutajalt küsida?
         String kasutaja2 = "Mati";
@@ -92,7 +96,9 @@ public class HelloApplication extends Application {
                 "Kui olete lõpliku valiku teinud, siis 'Kinnita' nupule vajutades väljastatakse mõlemale tšekk.");
         juhend.setFont(new Font(14));
         vbox.getChildren().add(juhend);
-        juhend.wrappingWidthProperty().bind(vbox.widthProperty());
+        scrollpane.viewportBoundsProperty().addListener((obs, oldVal, newVal) -> { //wrapib teksti, kui akna laius muuta
+            juhend.setWrappingWidth(newVal.getWidth());
+        });
         //tooted
         ArrayList<CheckBox> tootevalikud = new ArrayList<>();
         for (Toode toode : ost.getTooted()) {
@@ -146,7 +152,9 @@ public class HelloApplication extends Application {
                     DateTimeFormatter formaat = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
                     Text kinnitus = new Text("Valmis! Väljastatud on kaks tšekki, mille leiate failidest '"+kasutaja1+"-"+LocalDateTime.now().format(formaat)+".txt' ja '"+kasutaja2+"-"+LocalDateTime.now().format(formaat)+".txt'");
                     vbox.getChildren().add(kinnitus);
-                    kinnitus.wrappingWidthProperty().bind(vbox.widthProperty());
+                    scrollpane.viewportBoundsProperty().addListener((obs, oldVal, newVal) -> {
+                        kinnitus.setWrappingWidth(newVal.getWidth());
+                    });
                     kinnitus.setFont(new Font(14));
                     List<Ost> ostud;
                     //ostu salvestamine. mdea kas see on kõige parem viis teha seda lmao
