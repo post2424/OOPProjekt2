@@ -13,7 +13,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HelloApplication extends Application {
+public class OstukorviJagamine extends Application {
     public double arvutaKogusumma(String nimi, Ost ost) { //leiab ühe inimese poolt tasutava summa nime järgi
         double kogusumma = 0;
         for (Toode toode : ost.getTooted()) {
@@ -61,7 +60,7 @@ public class HelloApplication extends Application {
         for (Toode toode : ost.getTooted()) {
             if (toode.getKelleMaksta().equals(nimi1)) {
                 tooted1.add(toode);
-            } else if (toode.getKelleMaksta().equals(nimi2)) { /*siin võiks nt erindi visata kui ei võrdu kummagi nimega*/
+            } else if (toode.getKelleMaksta().equals(nimi2)) {
                 tooted2.add(toode);
             }
         }
@@ -152,6 +151,7 @@ public class HelloApplication extends Application {
                     DateTimeFormatter formaat = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
                     Text kinnitus = new Text("Valmis! Väljastatud on kaks tšekki, mille leiate failidest '"+kasutaja1+"-"+LocalDateTime.now().format(formaat)+".txt' ja '"+kasutaja2+"-"+LocalDateTime.now().format(formaat)+".txt'");
                     vbox.getChildren().add(kinnitus);
+                    kinnitus.setWrappingWidth(scrollpane.getViewportBounds().getWidth());
                     scrollpane.viewportBoundsProperty().addListener((obs, oldVal, newVal) -> {
                         kinnitus.setWrappingWidth(newVal.getWidth());
                     });

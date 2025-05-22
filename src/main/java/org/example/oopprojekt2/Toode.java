@@ -15,7 +15,7 @@ public class Toode implements Serializable {
         this.kelleMaksta = kelleMaksta;
     }
 
-    public Toode(String kirjeldus, double hind, String kelleMaksta) { /*saab luua ka kogust määramata, siis loetakse koguseks vaikimisi 1*/
+    public Toode(String kirjeldus, double hind, String kelleMaksta) { //saab luua ka kogust määramata, siis loetakse koguseks vaikimisi 1
         this.kirjeldus = kirjeldus;
         this.kogus = 1;
         this.hind = hind;
@@ -28,10 +28,6 @@ public class Toode implements Serializable {
 
     public double getKogus() {
         return kogus;
-    }
-
-    public double getHind() {
-        return hind;
     }
 
     public String getKelleMaksta() {

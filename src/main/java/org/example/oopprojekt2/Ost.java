@@ -1,10 +1,7 @@
 package org.example.oopprojekt2;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Ost implements Serializable {
@@ -15,7 +12,7 @@ public class Ost implements Serializable {
     public Ost(List<Toode> tooted) {
         this.tooted = tooted;
         this.ostuaeg = LocalDateTime.now();
-        this.onTagasiMakstud = false; /*ostu tegemisel eeldab, et selle eest ei ole veel tagasi makstud*/
+        this.onTagasiMakstud = false; //ostu tegemisel eeldab, et selle eest ei ole veel tagasi makstud
     }
 
     public List<Toode> getTooted() {
@@ -33,8 +30,4 @@ public class Ost implements Serializable {
         onTagasiMakstud = true;
     }
 
-    @Override
-    public String toString() { //testimiseks
-        return tooted.toString();
-    }
 }

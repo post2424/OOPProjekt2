@@ -9,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -17,10 +16,9 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
-public class OstuajaluguTest extends Application {
+public class Ostuajalugu extends Application {
 
     public static void main(String[] args) {
         launch(args);
