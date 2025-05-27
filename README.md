@@ -5,5 +5,7 @@ Kompileerimise juhendid:
 
 sudo apt update && sudo apt upgrade -y
 sudo curl -s "https://get.sdkman.io" | bash
-sdk install java 17.0.4-
+sdk install java 17.0.8-tem
+sdk default java 17.0.8-tem
 wget https://github.com/gluonhq/graal/releases/download/gluon-22.1.0.1-Final/graalvm-svm-java17-linux-gluon-22.1.0.1-Final.tar.gz
+//TODO
