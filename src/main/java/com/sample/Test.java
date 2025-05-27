@@ -1,4 +1,4 @@
-package org.example.oopprojekt2;
+package com.sample;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -22,7 +22,7 @@ public class Test {
                 bw.write("\t");
                 bw.write(String.valueOf(toode.getKogus()));
                 bw.write("\t");
-                double summa = Math.round(toode.getKogus()*toode.getHind()*100.0)/100.0;
+                double summa = Math.round(toode.getKogus()*100.0)/100.0;
                 kogusumma += summa;
                 bw.write(String.valueOf(summa));
                 bw.newLine();

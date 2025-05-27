@@ -1,4 +1,4 @@
-package org.example.oopprojekt2;
+package com.sample;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

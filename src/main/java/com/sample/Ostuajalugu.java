@@ -1,4 +1,4 @@
-package org.example.oopprojekt2;
+package com.sample;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
