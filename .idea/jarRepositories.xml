@@ -12,6 +12,11 @@
       <option name="url" value="https://repo.maven.apache.org/maven2" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="jitpack.io" />
+      <option name="name" value="jitpack.io" />
+      <option name="url" value="https://jitpack.io" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="gluon-releases" />
       <option name="name" value="gluon-releases" />
       <option name="url" value="https://nexus.gluonhq.com/nexus/content/repositories/releases/" />
@@ -20,6 +25,16 @@
       <option name="id" value="AsposeJavaAPI" />
       <option name="name" value="Aspose Java API" />
       <option name="url" value="http://repository.aspose.com/repo/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="google" />
+      <option name="name" value="Google" />
+      <option name="url" value="https://maven.google.com" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="google" />
+      <option name="name" value="Google Maven Repository" />
+      <option name="url" value="https://maven.google.com" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="central" />
@@ -35,6 +50,11 @@
       <option name="id" value="mavenLocal()" />
       <option name="name" value="mavenLocal()" />
       <option name="url" value="mavenLocal()" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="local-maven" />
+      <option name="name" value="local-maven" />
+      <option name="url" value="file:///C:/Users/markuspost/.m2/repository" />
     </remote-repository>
   </component>
 </project>

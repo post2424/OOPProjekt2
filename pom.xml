@@ -82,6 +82,17 @@
             <artifactId>util</artifactId>
             <version>${attach.version}</version>
         </dependency>
+        <dependency>
+        <groupId>com.squareup.okhttp3</groupId>
+        <artifactId>okhttp</artifactId>
+        <version>4.9.3</version>
+    </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20230227</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -117,12 +128,6 @@
                         <list>statusbar</list>
                         <list>storage</list>
                     </attachList>
-                    <bundlesList>
-                        <list>com.sample.HelloController</list>
-                    </bundlesList>
-                    <reflectionList>
-                        <list>com.sample.HelloController</list>
-                    </reflectionList>
                 </configuration>
             </plugin>
         </plugins>
@@ -145,11 +150,9 @@
 
     <repositories>
         <repository>
-            <id>mavenLocal()</id>
-            <name>mavenLocal()</name>
-            <url>mavenLocal()</url>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
-
         <repository>
             <id>central</id>
             <url>https://repo.maven.apache.org/maven2</url>
@@ -157,6 +160,11 @@
         <repository>
             <id>gluon-releases</id>
             <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
+        </repository>
+        <repository>
+            <id>google</id>
+            <name>Google Maven Repository</name>
+            <url>https://maven.google.com</url>
         </repository>
     </repositories>
 </project>

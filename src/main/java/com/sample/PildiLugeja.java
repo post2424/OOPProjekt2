@@ -1,40 +1,63 @@
 package com.sample;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Pattern;
+import java.io.*;
+import java.nio.file.Files;
+import java.util.*;
+import okhttp3.*;
 
 public class PildiLugeja {
-    public static Ost[] leiaPildistInfo(File pilt) {
+    private static final String API_KEY = "K84337961188957K84337961188957";
+    private static final String OCR_URL = "https://api.ocr.space/parse/image";
+    public static String tekst;
 
-        String tekst = "";
-        try (FileWriter writer = new FileWriter("output.txt")) {
-            writer.write(tekst);
-        } catch (IOException e) {
-            e.printStackTrace();
+    private static String OCR(File pilt) throws IOException {
+        byte[] bytes = Files.readAllBytes(pilt.toPath());
+        String base64 = Base64.getEncoder().encodeToString(bytes);
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("apikey", API_KEY)
+                .addFormDataPart("base64Image", "data:image/png;base64," + base64)
+                .addFormDataPart("language", "swe")
+                .addFormDataPart("isOverlayRequired", "false")
+                .addFormDataPart("isTable","true")
+                .build();
+        Request request = new Request.Builder()
+                .url(OCR_URL)
+                .post(body)
+                .build();
+        try (Response response = client.newCall(request).execute()) {
+            return response.body().string();
         }
-        List<String> tükeldatudTekst = Arrays.asList(tekst.split("\\R"));
-        //Leiab nimekirjra alguse ja lõpu;
-        int nimekirjaAlgus = -1;
-        int nimekirjaLõpp = 0;
-        for (int i = 0; i < tükeldatudTekst.size(); i++) {
-            if (nimekirjaAlgus==-1) {
-                if (tükeldatudTekst.get(i).contains("Toode|Kogus"))nimekirjaAlgus = i+1;
-            }else if (tükeldatudTekst.get(i).contains("Kokku")) {nimekirjaLõpp = i-1;break;}
+    }
+    public static String[] parseText(String s){
+        String tekstiAlgus  = "Toode\\tKogus\\tKokku";
+        int infoAlgus = s.lastIndexOf(tekstiAlgus);
+        int infoLõpp = s.lastIndexOf("Soodustused");
+        String vahepealne = s.substring(infoAlgus+tekstiAlgus.length(),infoLõpp);
+        String[] väljasta = vahepealne.split("\\\\t.{0,1}\\\\r\\\\n");
+        return väljasta;
+    }
+    public static void prindi(String[] arr ){
+        for (String el: arr){
+            System.out.println("AA");
+            System.out.println(el);
         }
-        Ost[] välja = new Ost[nimekirjaAlgus-nimekirjaLõpp];
-        /*
-        Ost ost = new Ost();
-        for (int i = nimekirjaAlgus; i <= nimekirjaLõpp; i++) {
-            String
-            ost.lisaToode(new Toode())
+    }
+    public static Ost leiaPildistInfo(File pilt) throws IOException {
 
-
-*/
+        tekst = OCR(pilt);
+        String[] tükeldatudTekst = parseText(tekst);
+        prindi(tükeldatudTekst);
+        Ost välja = new Ost(new ArrayList<>());
+        for (int i = 1; i < tükeldatudTekst.length-1; i++) {
+            String praeguneTekst = tükeldatudTekst[i];
+            String[] tükeldatud2 = praeguneTekst.split("\\\\t");
+            String nimetus = tükeldatud2[0];
+            System.out.println(tükeldatud2[1]);
+            Double kogus = Double.parseDouble(tükeldatud2[1].replaceAll(",","."));
+            Double hind = Double.parseDouble(tükeldatud2[2].replaceAll(",","."));
+            välja.getTooted().add(new Toode(nimetus,kogus,hind/kogus, "Jüri"));
+        }
         return välja;
     }
 
