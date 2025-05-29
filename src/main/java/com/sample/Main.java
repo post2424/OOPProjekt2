@@ -13,6 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -24,7 +26,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
+import javafx.stage.*;
 import javafx.embed.swing.SwingFXUtils;
 
 import java.awt.*;
@@ -45,11 +47,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import javafx.stage.WindowEvent;
+import atlantafx.base.theme.PrimerDark;
 
 public class Main extends Application {
     @Override
     public void start(Stage aken) throws IOException {
+        Main.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
     if (Platform.isAndroid()) {
         PicturesService.create().ifPresent(service -> {
             service.imageProperty().addListener((obs, ov, image) -> {
@@ -76,7 +79,7 @@ public class Main extends Application {
         }
     }
     }
-
+    private static boolean  juhendKuvatud = false;
     public static void uusTseen(Stage aken, Ost ost){
         VBox vbox = new VBox();
         vbox.setSpacing(5);
@@ -84,8 +87,10 @@ public class Main extends Application {
         javafx.scene.control.ScrollPane scrollpane = new javafx.scene.control.ScrollPane(vbox);
         scrollpane.setFitToWidth(true);
         scrollpane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); //näitab ainult vertikaalset kerimisriba ja ainult siis, kui sisu ära ei mahu
-        Scene stseen = new Scene(scrollpane, 510, 400);
-        //näiteost testimiseks, hiljem loeb pildi pealt
+        scrollpane.setStyle("-fx-background-color: -color-bg-default;");
+        Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+        double width = screenBounds.getWidth();
+        double height = screenBounds.getHeight();
         String kasutaja1 = "Jüri"; //need kasutajalt küsida?
         String kasutaja2 = "Mati";
         Text juhend = new Text("Palun valige tooted, mille eest peaks maksma "+kasutaja2+". " +
@@ -93,7 +98,20 @@ public class Main extends Application {
                 "\nSoovi korral saate pärast 'Arvuta' nupule vajutamist veel oma valikut muuta. " +
                 "Kui olete lõpliku valiku teinud, siis 'Kinnita' nupule vajutades väljastatakse mõlemale tšekk.");
         juhend.setFont(new javafx.scene.text.Font(14));
-        vbox.getChildren().add(juhend);
+        Button juhendiNupp = new Button("Kuva juhend");
+        StackPane.setAlignment(juhendiNupp, Pos.BOTTOM_RIGHT);
+        StackPane.setMargin(juhendiNupp, new Insets(10));
+        juhendiNupp.setOnMouseReleased(event -> {
+            if (!juhendKuvatud)vbox.getChildren().add(juhend);
+            else vbox.getChildren().remove(juhend);
+            juhendKuvatud = !juhendKuvatud;
+            });
+        StackPane juur = new StackPane(scrollpane,juhendiNupp);
+        Scene stseen = new Scene(juur, width, height);
+        //näiteost testimiseks, hiljem loeb pildi pealt
+
+
+
         scrollpane.viewportBoundsProperty().addListener((obs, oldVal, newVal) -> { //wrapib teksti, kui akna laius muuta
             juhend.setWrappingWidth(newVal.getWidth());
         });

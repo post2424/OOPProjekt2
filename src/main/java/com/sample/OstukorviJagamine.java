@@ -89,10 +89,7 @@ public class OstukorviJagamine extends Application {
                 new Toode("kartul", 2.71, 0.89, kasutaja1)
         ));
         //juhend
-        Text juhend = new Text("Palun valige tooted, mille eest peaks maksma "+kasutaja2+". " +
-                "Tooted, mille eest peaks maksma "+kasutaja1+", jätke valimata." +
-                "\nSoovi korral saate pärast 'Arvuta' nupule vajutamist veel oma valikut muuta. " +
-                "Kui olete lõpliku valiku teinud, siis 'Kinnita' nupule vajutades väljastatakse mõlemale tšekk.");
+        Text juhend = new Text("Vali milliste asjade eest, peab teine inimene sulle tagasi maksma");
         juhend.setFont(new Font(14));
         vbox.getChildren().add(juhend);
         scrollpane.viewportBoundsProperty().addListener((obs, oldVal, newVal) -> { //wrapib teksti, kui akna laius muuta
